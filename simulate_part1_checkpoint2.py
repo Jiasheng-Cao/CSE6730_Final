@@ -27,7 +27,7 @@ def system_dynamics(y, t, p):
     rho_AOB = p['mu_AOB_max'] * (S_NH4 / (p['K_NH4'] + S_NH4)) * (S_O2_eff / (p['K_O2_AOB'] + S_O2_eff)) * X_AOB
     rho_NOB = p['mu_NOB_max'] * (S_NO2 / (p['K_NO2'] + S_NO2)) * (S_O2_eff / (p['K_O2_NOB'] + S_O2_eff)) * X_NOB
 
-    S_NH4_in = 16.8
+    S_NH4_in = 13.4
 
     dNH4 = (1 / p['V_Q']) * (S_NH4_in - S_NH4) - (1 / p['Y_AOB']) * rho_AOB
     dNO2 = (1 / p['V_Q']) * (0 - S_NO2) + (1 / p['Y_AOB']) * rho_AOB - (1 / p['Y_NOB']) * rho_NOB
@@ -45,7 +45,7 @@ def system_dynamics(y, t, p):
 # 100 day
 t = np.linspace(0, 100, 50000)
 # y0 = [NH4, NO2, NO3, O2, X_AOB, X_NOB]
-y0 = [16.8, 0.0, 0.0, 2.0, 20.0, 10.0]
+y0 = [13.4, 0.0, 0.0, 2.0, 20.0, 10.0]
 
 def rk4_step_sys(y, t, dt, p):
     k1 = system_dynamics(y, t, p)
@@ -66,6 +66,16 @@ for ti in t:
     y = rk4_step_sys(y, ti, dt, params)
 
 sol = np.array(sol)
+
+# Print values at day 100
+NH4_100 = sol[-1, 0]
+NO2_100 = sol[-1, 1]
+NO3_100 = sol[-1, 2]
+print("Values at day 100:")
+print(f"NH4-N = {NH4_100:.4f} mg N/L")
+print(f"NO2-N = {NO2_100:.4f} mg N/L")
+print(f"NO3-N = {NO3_100:.4f} mg N/L")
+
 
 fig, ax1 = plt.subplots(figsize=(10, 6))
 

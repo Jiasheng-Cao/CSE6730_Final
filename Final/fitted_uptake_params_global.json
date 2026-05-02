@@ -1,0 +1,15 @@
+{
+  "global": {
+    "Umax": 999999.8787409428,
+    "Km": 899654.3595659791,
+    "metrics": {
+      "R2": 0.5901152581333049,
+      "MAE": 41.98293243131653,
+      "RMSE": 56.970152283470334
+    },
+    "x_col": "Lifetime Avg [N] (mg/L)",
+    "y_col": "Lifetime Avg U_N",
+    "sheet_name": "ModSample",
+    "screen_col": "U_N Screening"
+  }
+}
